@@ -29,7 +29,10 @@
 // Import reusable UI components: Button and Badge
 
 /* --- YOUR IMPORTS GO HERE --- */
-
+import {motion, useScroll, useTransform} from "framer-motion"; //Named import {}
+import heroBeans from "../assets/hero-beans.png"; //Default imports
+import Button from "./ui/Button"; // Component import
+import Badge from "./ui/Badge"; // Component import
 
 // STEP 2: Animation Variants (outside the component)
 // Create two objects that define how text animates:
@@ -83,3 +86,76 @@
 //   - Floating price badge (circular badge showing "FROM $14.99 per bag")
 
 /* --- YOUR COMPONENT CODE GOES HERE --- */
+
+// animation states for the headline container -- staggerchildren which delays word by 0.12s so they appear one after another
+const textVariants = {
+    hidden: {},
+    visible: {transition: {staggerChildren: 0.12}}
+};
+
+// animation states for each individual word: invisible
+const wordVariant = {
+    hidden: {opacity: 0, y: 60, rotateX: -40},
+    visible: {
+        opacity: 1,
+        y: 0,
+        rotateX: 0,
+        transition: {duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94]}
+    }
+};
+
+export default function HeroSection() {
+    //create a live value to track how far the page has scrolled
+    const {scrollY} = useScroll();
+
+    //scroll-linked values for the hero image: over the first 500-600px
+    //scroll shrinks, fades out, and drifts down
+    const imgScale = useTransform(scrollY, [0,600], [1.35, 0.9]);
+    const imgOpacity = useTransform(scrollY, [0,500], [1,0]);
+    const imgY = useTransform(scrollY, [0,600], [0,100]);
+
+
+    return (
+        <>
+            {/* Left - text content */}
+            <div id="home" className="hero-text-column">
+                <motion.div
+                    initial={{opacity: 0, y: 20}}
+                    animate={{opacity: 1, y: 0}}
+                    transition={{duration: 0.5, delay: 0.1}}
+                    >
+                    <Badge variants ="outline" className="mb-5">
+                        ✦ Premium Coffee Beans — Roasted Fresh Daily
+                    </Badge>
+
+                </motion.div>
+
+                {/* headline. */}
+                <motion.h1
+                    className = "h1-stack"
+                    style={{margin: 0, perspective: "600px"}}
+                    variants={textVariants}
+                    initial="hidden"
+                    animate="visible"
+                    >
+                    <motion.span variants={wordVariant} style={{display: "inline=block"}}>
+                        YOUR PLACE
+                    </motion.span>
+                    <br/>
+                    <motion.span
+                        variants={wordVariant}
+                        className="muted"
+                        style={{display: "inline-block"}}
+                        >
+                            FOR COFFEE
+                        </motion.span>
+                        <br/>
+                        <motion.span variants={wordVariant} style={{display: "inline-block"}}>
+                            BREWING
+                        </motion.span>
+                    </motion.h1>
+                </div>
+        </>
+
+    )
+};
