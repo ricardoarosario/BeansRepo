@@ -154,7 +154,91 @@ export default function HeroSection() {
                             BREWING
                         </motion.span>
                     </motion.h1>
+
+                    {/* paragraph delayed so it lands after the headline */}
+                    <motion.p
+                        className="lead"
+                        style={{marginTop: 18}}
+                        initial={{opacity: 0, y: 20}}
+                        animate={{opacity: 1, y: 0}}
+                        transition={{duration: 0.6,delay:0.6}}
+                    >
+                        Farm-to-cup single-origin beans from Ethiopia, Colombia & beyond. 
+                        Freshly roasted in small batches and shipped to your door within 48 hours.
+                    </motion.p>
+                    {/* condition ? ifTrue : ifFalse */}
+                    {/* buttons - each scrolls smoothly to a section by id. ? avoids an error if that section isn't on the page. */}
+                    <motion.div
+                        className="hero-actions"
+                        initial={{opacity: 0, y: 20}}
+                        animate={{opacity: 1, y: 0}}
+                        transition={{duratrion: 0.5, delay: 0.8}}
+                    >
+                        <Button
+                            variant="accent"
+                            size="lg"
+                            className="shadow-lg"
+                            onClick={() => document.getElementById("shop")?.scrollIntoView({behavior: "smooth"})}
+                        >
+                           SHOP COFFEE ☕ 
+                        </Button>
+                        <Button
+                            variant="outline"
+                            size="lg"
+                            onClick={() => document.getElementById("about")?.scrollIntoView({behavior: "smooth"})}
+                        >
+                        OUR STORY
+                        </Button>
+                    </motion.div>
+
+                    {/* trust indicators - appears last after the buttons */}
+                    <motion.div
+                        className="hero-trust"
+                        initial={{opacity: 0}}
+                        animate={{opacity: 1}}
+                        transition={{duration: 0.6, delay: 1.1}}
+                    >
+                    <span>★★★★★ 4.9/5 from 2,400+ customers</span>
+                    <span className="hero-trust-divider">|</span>
+                    <span>Free shipping over $50</span>
+                    </motion.div>
                 </div>
+
+                {/* right - beans image + floating price tag */}
+                <div className="hero-art-container">
+                    {/* style - the scroll-linked values about (shrink, fade, drift)
+                        initial/animate = the one-time entrace on page load */}
+                <motion.img 
+                    className="hero-art"
+                    src={heroBeans}
+                    alt="Premium coffee beans"
+                    style={{
+                        scale: imgScale,
+                        opacity: imgOpacity,
+                        y: imgY
+                    }}
+                    initial ={{opacity: 60}}
+                    animate ={{opacity: 1, scale: 1.35, x: 0}}
+                    transition ={{duration: 1.2, ease: [0.25,0.46,0.45,0.94]}}
+                />
+
+                {/* price badge - springs in bouncily once the image has arrived */}
+                <motion.div
+                    className="hero-floating-badge"
+                    initial={{opacity: 0, scale: 0.5}}
+                    animate={{opacity: 1, scale: 1}}
+                    transition={{
+                        duration: 0.5,
+                        delay: 1.2,
+                        type: "spring",
+                        stiffness: 200,
+                    }}
+                >
+                    <span className="hero-floating-badge-label">FROM</span>
+                    <span className="hero-floating-badge-label">$14.99</span>
+                    <span className="hero-floating-badge-label">Per Bag</span>
+                </motion.div>
+            </div>
         </>
 
     )

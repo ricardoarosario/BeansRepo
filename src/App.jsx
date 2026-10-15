@@ -63,6 +63,36 @@ export default function App(){
                     <HeroSection />
                 </div>
             </section>
+
+            {/* Features / Carousel */}
+            <section className="features bg-features" id="shop">
+
+            </section>
+
+            {/* Product Showcase */}
+            <section className="bg-cta">
+
+            </section>
+
+            {/* CTA */}
+            <section className="bg-cta">
+
+            </section>
+
+            {/* About */}
+            <section className="bg-cta" id="about">
+
+            </section>
+
+            {/* Contact */}
+            <section className="bg-cta" id="contact">
+
+            </section>
+
+            {/* Footer */}
+            <section className="bg-footer">
+                
+            </section>
         </div>
 
     )
