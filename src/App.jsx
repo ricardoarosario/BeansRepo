@@ -31,6 +31,7 @@
 /* --- YOUR IMPORTS GO HERE --- */
 import HeroSection from "./components/HeroSection";
 import FooterSection from "./components/FooterSection";
+import NavBar from "./components/NavBar";
 
 // STEP 2: Create and export the App component
 // Use: export default function App() { ... }
@@ -59,6 +60,7 @@ export default function App(){
 
     return (
         <div className="app">
+            <NavBar />
             <section className="hero bg-hero">
                 <div className="hero-grid">
                     <HeroSection />
