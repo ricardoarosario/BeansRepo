@@ -35,6 +35,7 @@ import {motion, AnimatePresence} from "framer-motion";
 import logo from "../assets/Beans_logo.png";
 import Button from "./ui/Button";
 import { useCart } from "./Cart";
+import { ShoppingBag } from "lucide-react";
 
 // STEP 2: Create and export the NavBar component
 // export default function NavBar() { ... }
@@ -140,7 +141,7 @@ export default function NavBar(){
                         onClick={() => setIsOpen(true)}
                         aria-label={`Open cart with ${itemCount} ${itemCount === 1 ? "item" : "items"}`}
                     >
-                        Cart
+                        <ShoppingBag size={20} strokeWidth={2.2} aria-hidden="true" />
                         <span className="cart-nav-count">{itemCount}</span>
                     </button>
                     <Button variant="accent" size="sm" className="hidden md:inline-flex">
@@ -216,7 +217,8 @@ export default function NavBar(){
                                     }}
                                     aria-label={`Open cart with ${itemCount} ${itemCount === 1 ? "item" : "items"}`}
                                 >
-                                    Cart <span className="cart-nav-count">{itemCount}</span>
+                                    <ShoppingBag size={20} strokeWidth={2.2} aria-hidden="true" />
+                                    <span className="cart-nav-count">{itemCount}</span>
                                 </button>
                             </nav>
                         </motion.div>
