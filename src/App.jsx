@@ -35,6 +35,7 @@ import NavBar from "./components/NavBar";
 import RibbonTicker from "./components/RibbonTicker";
 import FeaturesSection from "./components/FeaturesSection";
 import ProductShowcase from "./components/ProductShowcase";
+import { CartPanel, CartProvider } from "./components/Cart";
 
 // STEP 2: Create and export the App component
 // Use: export default function App() { ... }
@@ -60,10 +61,11 @@ import ProductShowcase from "./components/ProductShowcase";
 
 /* --- YOUR COMPONENT CODE GOES HERE --- */
 export default function App(){
-
     return (
-        <div className="app">
+        <CartProvider>
+            <div className="app">
             <NavBar />
+            <CartPanel />
             <section className="hero bg-hero">
                 <div className="hero-grid">
                     <HeroSection />
@@ -103,7 +105,8 @@ export default function App(){
             <section className="bg-footer">
                     <FooterSection />
             </section>
-        </div>
+            </div>
+        </CartProvider>
 
     )
 }
