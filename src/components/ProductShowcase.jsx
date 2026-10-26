@@ -36,8 +36,9 @@ import {motion} from "framer-motion";
 
 import ScrollReveal, {StaggerContainer, StaggerItem} from "./ui/ScrollReveal";
 import Badge from "./ui/Badge";
-import Button from "./ui/Badge";
+import Button from "./ui/Button";
 import Separator from "./ui/Separator";
+import { useCart } from "./Cart";
 
 // Images 
 import imgEthiopianHarrar from "../assets/Ethiopian-Harrar-Bag.png";
@@ -174,6 +175,8 @@ const products = [
 ];
 
 export default function ProductShowcase(){
+    const { addToCart } = useCart();
+
     return(
         <div className="product-showcase">
             <ScrollReveal animation="fadeUp">
@@ -209,7 +212,7 @@ export default function ProductShowcase(){
                         >
                             <div className="product-card-image">
                                 <img src={product.image} alt={product.name} loading="lazy"/>
-                                {products.badge && (<span className="product-badge">{product.badge}</span>)}
+                                {product.badge && (<span className="product-badge">{product.badge}</span>)}
                             </div>
                             <div className="product-card-info">
                                 <div className="product-card-header">
@@ -221,8 +224,13 @@ export default function ProductShowcase(){
                                     {product.origin} - {product.roast} Roast
                                 </p>
                                 <p className="product-notes">{product.notes}</p>
-                                <Button variant="primary" size="sm" className="w-full mt-3">
-                                    Add To Card
+                                <Button
+                                    variant="primary"
+                                    size="sm"
+                                    className="w-full mt-3"
+                                    onClick={() => addToCart(product)}
+                                >
+                                    Add To Cart
                                 </Button>
                             </div>
 

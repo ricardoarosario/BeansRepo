@@ -34,6 +34,7 @@ import {useState, useEffect} from "react";
 import {motion, AnimatePresence} from "framer-motion";
 import logo from "../assets/Beans_logo.png";
 import Button from "./ui/Button";
+import { useCart } from "./Cart";
 
 // STEP 2: Create and export the NavBar component
 // export default function NavBar() { ... }
@@ -92,6 +93,7 @@ export default function NavBar(){
     const [menuOpen,setMenuOpen] = useState(false);
     // Has the user scrolled? Adds a background/shadow once off the very top.
     const [scrolled, setScrolled] = useState(false);
+    const { itemCount, setIsOpen } = useCart();
     // Anytime type of objects or values you need.
 
     // Create a function expression.
@@ -101,7 +103,7 @@ export default function NavBar(){
         //useEffect --> It will track the use of scrolling.
         useEffect(() => {
             //True once we're more than 20px down the page.
-            const handleScroll= setScrolled(window.scrollY > 20);
+            const handleScroll = () => setScrolled(window.scrollY > 20);
 
             //promises --> Waiting for information.
             window.addEventListener("scroll", handleScroll, {passive: true});
@@ -132,6 +134,15 @@ export default function NavBar(){
                     </nav>
 
                     {/* Desktop CTA */}
+                    <button
+                        type="button"
+                        className="cart-nav-button hidden md:inline-flex"
+                        onClick={() => setIsOpen(true)}
+                        aria-label={`Open cart with ${itemCount} ${itemCount === 1 ? "item" : "items"}`}
+                    >
+                        Cart
+                        <span className="cart-nav-count">{itemCount}</span>
+                    </button>
                     <Button variant="accent" size="sm" className="hidden md:inline-flex">
                        Order Now ☕
                     </Button>
@@ -196,6 +207,17 @@ export default function NavBar(){
                                 >
                                     Order Now ☕
                                 </Button>
+                                <button
+                                    type="button"
+                                    className="cart-nav-button w-full"
+                                    onClick={() => {
+                                        setIsOpen(true);
+                                        closeMenu();
+                                    }}
+                                    aria-label={`Open cart with ${itemCount} ${itemCount === 1 ? "item" : "items"}`}
+                                >
+                                    Cart <span className="cart-nav-count">{itemCount}</span>
+                                </button>
                             </nav>
                         </motion.div>
                     )}
